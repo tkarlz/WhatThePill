@@ -1,16 +1,11 @@
-package com.example.whatthepill
+package com.pill.what
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 
 
 class MainActivity : AppCompatActivity() {

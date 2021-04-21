@@ -1,8 +1,7 @@
-package com.example.whatthepill
+package com.pill.what
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.whatthepill.TodoDao
 
 @Database(entities = [Todo::class], version = 1)
     abstract class AppDatabase : RoomDatabase() {

@@ -1,4 +1,4 @@
-package com.example.whatthepill
+package com.pill.what
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

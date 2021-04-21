@@ -1,7 +1,6 @@
-package com.example.whatthepill
+package com.pill.what
 
 import androidx.room.*
-import com.example.whatthepill.Todo
 
 @Dao
 interface TodoDao {

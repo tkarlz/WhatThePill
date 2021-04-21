@@ -1,4 +1,4 @@
-package com.example.whatthepill
+package com.pill.what
 
 import android.content.Context
 import android.view.LayoutInflater

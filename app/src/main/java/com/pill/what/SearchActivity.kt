@@ -1,4 +1,4 @@
-package com.example.whatthepill
+package com.pill.what
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +7,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import com.example.whatthepill.AppDatabase
-import com.example.whatthepill.Todo
-import kotlinx.android.synthetic.main.activity_main.*
 
 class SearchActivity : AppCompatActivity() {
 

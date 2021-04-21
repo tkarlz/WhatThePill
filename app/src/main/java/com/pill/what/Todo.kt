@@ -1,4 +1,4 @@
-package com.example.whatthepill
+package com.pill.what
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

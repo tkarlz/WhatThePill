@@ -1,4 +1,4 @@
-package com.example.whatthepill
+package com.pill.what
 
 import org.junit.Test
 
