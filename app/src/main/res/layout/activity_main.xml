@@ -5,45 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:clipToPadding="false"
     tools:context=".MainActivity">
 
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.505"
-        app:queryHint="제품명을 입력하세요" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onButton1Clicked"
-        android:text="사진촬영"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
-        android:onClick="onButton2Clicked"
-        android:text="약학정보원"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageButton
+            android:id="@+id/imageButtonCamera"
+            android:onClick="cameraButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@color/colorPrimary"
+            android:layout_margin="15dp"
+            android:padding="20dp"
+            android:elevation="10dp"
+            android:scaleType="fitCenter"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_baseline_camera_alt_24"/>
 
 
+        <ImageButton
+            android:id="@+id/imageButtonImageLoad"
+            android:onClick="imageLoadButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_toRightOf="@+id/imageButtonCamera"
+            android:background="@color/colorPrimary"
+            android:layout_margin="15dp"
+            android:padding="20dp"
+            android:elevation="10dp"
+            android:scaleType="fitCenter"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_baseline_image_24"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonSearch"
+            android:onClick="searchButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/imageButtonCamera"
+            android:layout_margin="15dp"
+            android:padding="20dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="fitCenter"
+            android:elevation="10dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_baseline_search_24"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonKPIC"
+            android:onClick="KPICButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitCenter"
+            android:layout_below="@id/imageButtonImageLoad"
+            android:layout_toRightOf="@id/imageButtonSearch"
+            android:elevation="10dp"
+            android:layout_margin="15dp"
+            android:padding="20dp"
+            android:background="@color/colorPrimary"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/kpic"/>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
