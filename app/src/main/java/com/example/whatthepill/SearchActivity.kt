@@ -1,17 +1,17 @@
 package com.example.whatthepill
 
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import android.widget.Toolbar
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.whatthepill.AppDatabase
+import com.example.whatthepill.Todo
+import kotlinx.android.synthetic.main.activity_main.*
 
 class SearchActivity : AppCompatActivity() {
 
@@ -24,46 +24,24 @@ class SearchActivity : AppCompatActivity() {
         actionBar!!.title = "의약품 정보 검색"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        var arrays = intent.getStringArrayExtra("arrays")
+        val db = Room.databaseBuilder(
+                applicationContext,
+                AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries()
+                .build()
+
+        val result_text : TextView = findViewById(R.id.result_text)
+        val add_button : ImageButton = findViewById(R.id.add_button)
+        val todo_edit : EditText = findViewById(R.id.todo_edit)
 
 
+        result_text.text= db.todoDao().getAll().toString()
 
-//        val search = findViewById<SearchView>(R.id.search_view)
-//        val names: Array<String> = arrayOf( "타이레놀", "가나릴정", "가나메드정", "가나슨캡슐")
-//        val adapter: ArrayAdapter<String> = ArrayAdapter(
-//                this, android.R.layout.simple_list_item_1, names
-//        )
-//
-////          search.setOnSearchClickListener(object : View.OnClickListener {
-////             override fun onClick(v: View?) {
-////                Log.e(":test", "aa")
-////            }
-////        })
-//
-//        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-//            override fun onQueryTextSubmit(p0: String): Boolean {
-//                search.clearFocus()
-//
-//                var searchPill = names.filter { it.contains(p0.trim()) }
-//
-//                if(searchPill.isNotEmpty()){
-//                    adapter.filter.filter(p0)
-//                    val nextIntent = Intent(this@MainActivity, SearchActivity::class.java)
-//                    nextIntent.putExtra("arrays", searchPill.toTypedArray())
-//
-//                    startActivity(nextIntent)
-//                }
-//                else{
-//                    Toast.makeText(applicationContext, "조회된 데이터가 없습니다.", Toast.LENGTH_LONG).show()
-//                }
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(p0: String): Boolean {
-//                adapter.filter.filter(p0)
-//                return false
-//            }
-//        })
+        add_button.setOnClickListener{
+            db.todoDao().insert(Todo(todo_edit.text.toString()))
+            result_text.text = db.todoDao().getAll().toString()
+        }
+
 
     }
     override fun onSupportNavigateUp(): Boolean {
