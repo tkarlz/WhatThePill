@@ -4,8 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.pill.what.GlobalVariable.Companion.pillData
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
             setDisplayUseLogoEnabled(true)
             setLogo(R.drawable.ic_baseline_medical_services_24)
         }
+        Log.e("tagsd", pillData.filter{ it.name == "가나릴정" }[0].toString())
     }
 
     fun cameraButton(view: View){
@@ -41,7 +44,5 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.health.kr/"))
         startActivity(intent)
     }
-
-
 }
 
