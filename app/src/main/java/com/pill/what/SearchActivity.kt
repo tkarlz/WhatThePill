@@ -1,5 +1,6 @@
 package com.pill.what
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
 
@@ -30,13 +32,16 @@ class SearchActivity : AppCompatActivity() {
         val add_button : ImageButton = findViewById(R.id.add_button)
         val todo_edit : EditText = findViewById(R.id.todo_edit)
 
-
         result_text.text= db.todoDao().getAll().toString()
 
         add_button.setOnClickListener{
             db.todoDao().insert(Todo(todo_edit.text.toString()))
             result_text.text = db.todoDao().getAll().toString()
+            val nextIntent = Intent(this@SearchActivity, PillListActivity::class.java)
+            nextIntent.putExtra("name",todo_edit.text.toString())
+            startActivity(nextIntent)
         }
+
 
 
     }

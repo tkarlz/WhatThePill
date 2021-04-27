@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun imageLoadButton(view: View){
-        val nextIntent = Intent(this@MainActivity, PillListActivity::class.java)
-        startActivity(nextIntent)
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivity(intent)
     }
 
     fun searchButton(view: View){

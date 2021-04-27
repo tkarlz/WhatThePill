@@ -23,13 +23,14 @@
 
 
     <ImageView
-        android:id="@+id/pillPhotoImg"
+        android:id="@+id/pillImage"
         android:layout_width="100dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -43,8 +44,8 @@
         android:layout_marginLeft="16dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/pillPhotoImg"
-        app:layout_constraintTop_toTopOf="@+id/pillPhotoImg"
+        app:layout_constraintStart_toEndOf="@+id/pillImage"
+        app:layout_constraintTop_toTopOf="@+id/pillImage"
         tools:text="name" />
 
     <TextView
@@ -52,12 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pillPhotoImg"
+        app:layout_constraintBottom_toBottomOf="@+id/pillImage"
         app:layout_constraintStart_toStartOf="@+id/pillNameTv"
         tools:text="Ingredient" />
 
     <TextView
-        android:id="@+id/pillPharmacistTv"
+        android:id="@+id/pillCompanyTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
