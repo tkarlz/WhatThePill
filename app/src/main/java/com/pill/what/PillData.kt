@@ -1,12 +1,6 @@
 package com.pill.what
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-
-@Entity
 data class PillData(
-    @PrimaryKey(autoGenerate = false)
     var name: String,
     var forms: String,
     var print_front: String,
