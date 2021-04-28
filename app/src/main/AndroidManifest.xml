@@ -15,8 +15,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.WhatThePill">
-        <activity android:name=".PillInfoActivity" >
-        </activity>
+        <activity android:name=".PillInfoActivity" />
         <activity android:name=".PillListActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
