@@ -18,6 +18,7 @@
         android:ems="10"
         android:hint="검색어를 입력해주세요."
         android:inputType="textPersonName"
+        android:imeOptions="actionSearch"
         app:layout_constraintEnd_toStartOf="@+id/add_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

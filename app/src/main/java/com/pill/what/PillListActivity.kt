@@ -28,8 +28,7 @@ class PillListActivity : AppCompatActivity() {
 
         }
 
-
-        val pillList = pillInfo.filter{ it.name.contains(data!!.trim())}
+        val pillList = pillInfo.filter{ it.name.contains(data!!)}
         val mAdapter = PillListRvAdapter(this, pillList) { pill ->
             val nextIntent = Intent(this@PillListActivity, PillInfoActivity::class.java)
             val webView: WebView = findViewById(R.id.webView)
