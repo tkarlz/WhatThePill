@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.webkit.WebView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pill.what.GlobalVariable.Companion.pillInfo
@@ -16,7 +17,6 @@ class PillListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_list)
 
-        val intent = getIntent();
         val data = intent.getStringExtra("name")
 
         supportActionBar?.apply {
@@ -29,12 +29,11 @@ class PillListActivity : AppCompatActivity() {
         }
 
 
-        val pillList = pillInfo.filter{ it.name.contains(data?.trim()!!)}
+        val pillList = pillInfo.filter{ it.name.contains(data!!.trim())}
         val mAdapter = PillListRvAdapter(this, pillList) { pill ->
             val nextIntent = Intent(this@PillListActivity, PillInfoActivity::class.java)
-            nextIntent.putExtra("code", pill.code)
-            nextIntent.putExtra("image", pill.image)
-            startActivity(nextIntent)
+            val webView: WebView = findViewById(R.id.webView)
+            CrawlingData(this, nextIntent, webView, pill.code).start()
         }
         val rcv : RecyclerView = findViewById(R.id.mRecyclerView)
         rcv.adapter = mAdapter

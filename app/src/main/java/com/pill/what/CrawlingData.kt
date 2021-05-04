@@ -1,38 +1,55 @@
 package com.pill.what
 
-import android.webkit.JavascriptInterface
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.util.Log
+import android.view.Window
+import android.webkit.*
+import android.widget.Toast
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
-class CrawlingData(_webView: WebView, _code: String, _load: EventListener) {
-    val webView = _webView
-    val code = _code
-    val load = _load
+class CrawlingData(val context: Context, val intent: Intent, private val webView: WebView, private val code: String) {
+    val dlg = Dialog(context)
 
     init {
+        dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dlg.setContentView(R.layout.dialog_progress)
+        dlg.setCancelable(false)
+        dlg.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dlg.show()
+
         webView.settings.javaScriptEnabled = true
         // 자바스크립트인터페이스 연결
-        // 이걸 통해 자바스크립트 내에서 자바함수에 접근할 수 있음.
         webView.addJavascriptInterface(MyJavascriptInterface(this), "Android")
-        // 페이지가 모두 로드되었을 때, 작업 정의
         webView.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView, url: String) {
+            override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 // 자바스크립트 인터페이스로 연결되어 있는 getHTML를 실행
-                // 자바스크립트 기본 메소드로 html 소스를 통째로 지정해서 인자로 넘김
-                view.loadUrl("javascript:window.Android.getHtml(document.getElementsByTagName('body')[0].innerHTML);")
-                view.onPause()
+                view?.loadUrl("javascript:window.Android.getHtml(document.getElementsByTagName('body')[0].innerHTML);")
+                view?.onPause()
+            }
+
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                super.onReceivedError(view, request, error)
+                view?.onPause()
+                dlg.dismiss()
+                Toast.makeText(context, "데이터를 불러올 수 없습니다.", Toast.LENGTH_SHORT)
             }
         }
-        //지정한 URL을 웹 뷰로 접근하기
-        webView.loadUrl("https://www.health.kr/searchDrug/result_drug.asp?drug_cd=$code")
     }
 
+    fun start() {
+        dlg.show()
+        webView.loadUrl("https://www.health.kr/searchDrug/result_drug.asp?drug_cd=$code")
+    }
 }
 
-class MyJavascriptInterface(val crawlingData: CrawlingData) {
+class MyJavascriptInterface(private val crawlingData: CrawlingData) {
     @JavascriptInterface
     fun getHtml(html: String) {
         //위 자바스크립트가 호출되면 여기로 html이 반환됨
@@ -49,11 +66,13 @@ class MyJavascriptInterface(val crawlingData: CrawlingData) {
                                         doc.select("#charact").text(),
                                         doc.select("#cls_code").text(),
                                         doc.select("#stmt").text(),
-                                        doc.select("#effect").html(),
-                                        doc.select("#dosage").html() ,
-                                        doc.select("#caution").html(),
+                                        doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(1)").html(),
+                                        doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(2)").html() ,
+                                        doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(3)").html(),
                                         doc.select("#mediguide").html())
 
-        crawlingData.load.onLoadData(detailedData)
+        crawlingData.intent.putExtra("data", detailedData)
+        crawlingData.context.startActivity(crawlingData.intent)
+        crawlingData.dlg.dismiss()
     }
 }

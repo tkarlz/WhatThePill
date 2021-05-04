@@ -1,5 +1,9 @@
 package com.pill.what
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class DetailedData(
     var drugName: String,  // 제품명
     var drugImage: String,  // 이미지 링크
@@ -16,4 +20,4 @@ data class DetailedData(
     var drugUsage: String,  // 용법 용량
     var precautions: String, // 사용상의 주의사항
     var medicationInfo: String // 복약정보
-)
+) : Parcelable

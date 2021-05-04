@@ -9,20 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 
-interface EventListener {
-    fun onLoadData(data: DetailedData)
-}
-
-class PillInfoActivity : AppCompatActivity(), EventListener {
+class PillInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_info)
 
-        val intent = getIntent();
-        val code = intent.getStringExtra("code")
-        val image = intent.getStringExtra("image")
-        Log.e("asdf", code!!)
+        val data = intent.getParcelableExtra<DetailedData>("data")
 
         supportActionBar?.apply {
             title = " What The Pill"
@@ -32,14 +25,7 @@ class PillInfoActivity : AppCompatActivity(), EventListener {
             setLogo(R.drawable.ic_baseline_medical_services_24)
         }
 
-        val webView: WebView = findViewById(R.id.webView)
-        CrawlingData(webView, code!!, this)
-
         val drugImageView: ImageView = findViewById(R.id.drugImage)
-        Glide.with(applicationContext).load(image!!).into(drugImageView)
-    }
-
-    override fun onLoadData(data: DetailedData) {
         val drugName: TextView = findViewById(R.id.drugName)
         val drugIngredient: TextView = findViewById(R.id.drugIngredient)
         val additives: TextView = findViewById(R.id.additives)
@@ -55,6 +41,7 @@ class PillInfoActivity : AppCompatActivity(), EventListener {
         val medicationInfo: TextView = findViewById(R.id.medicationInfo)
         val precautions: TextView = findViewById(R.id.precautions)
 
+        Glide.with(applicationContext).load(data!!.drugImage).into(drugImageView)
         drugName.text = drugName.text.toString() + data.drugName
         drugIngredient.text = drugIngredient.text.toString() + data.drugIngredient
         additives.text = additives.text.toString() + data.additives
@@ -70,5 +57,4 @@ class PillInfoActivity : AppCompatActivity(), EventListener {
         medicationInfo.text = medicationInfo.text.toString() + Html.fromHtml(data.medicationInfo)
         precautions.text = precautions.text.toString() + Html.fromHtml(data.precautions)
     }
-
 }
