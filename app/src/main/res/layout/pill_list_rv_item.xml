@@ -6,69 +6,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="100dp"
     android:id="@+id/card_view"
     android:layout_marginVertical="5dp"
-    card_view:cardElevation="5dp"
-    >
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:backgroundTint="@color/colorPrimary"
-    android:background="@drawable/item_border"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp">
+    card_view:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/item_border"
+        android:backgroundTint="@color/colorPrimary">
 
 
-    <ImageView
-        android:id="@+id/pillImage"
-        android:layout_width="100dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        <ImageView
+            android:id="@+id/pillImage"
+            android:layout_width="120dp"
+            android:layout_height="74dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            card_view:layout_constraintRight_toLeftOf="@id/pillIngredientTv" />
 
-    <TextView
-        android:id="@+id/pillNameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/pillImage"
-        app:layout_constraintTop_toTopOf="@+id/pillImage"
-        tools:text="name" />
-
-    <TextView
-        android:id="@+id/pillIngredientTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pillImage"
-        app:layout_constraintStart_toStartOf="@+id/pillNameTv"
-        tools:text="Ingredient" />
-
-    <TextView
-        android:id="@+id/pillCompanyTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pillNameTv"
-        app:layout_constraintStart_toEndOf="@+id/pillNameTv"
-        app:layout_constraintTop_toTopOf="@+id/pillNameTv"
-        tools:text="Pharmacist"
-        android:layout_marginLeft="16dp" />
+        <TextView
+            android:id="@+id/pillNameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/pillImage"
+            app:layout_constraintTop_toTopOf="@+id/pillImage"
+            tools:text="name" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/pillCompanyTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/pillIngredientTv"
+            app:layout_constraintStart_toEndOf="@+id/pillImage"
+            app:layout_constraintTop_toBottomOf="@+id/pillNameTv"
+            tools:text="Company" />
+
+        <TextView
+            android:id="@+id/pillIngredientTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pillImage"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/pillImage"
+            app:layout_constraintTop_toBottomOf="@+id/pillCompanyTv"
+            app:layout_constraintVertical_weight="1"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.5"
+            tools:text="Ingredient" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
