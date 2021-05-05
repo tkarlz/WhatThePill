@@ -7,7 +7,6 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.pill.what.GlobalVariable.Companion.pillData
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,16 +21,15 @@ class MainActivity : AppCompatActivity() {
             setDisplayUseLogoEnabled(true)
             setLogo(R.drawable.ic_baseline_medical_services_24)
         }
-        Log.e("tagsd", pillData.filter{ it.name == "가나릴정" }[0].toString())
     }
 
     fun cameraButton(view: View){
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivity(intent)
     }
 
     fun imageLoadButton(view: View){
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivity(intent)
     }
 

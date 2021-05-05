@@ -7,7 +7,7 @@
     tools:context=".SearchActivity">
 
     <EditText
-        android:id="@+id/todo_edit"
+        android:id="@+id/searchEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -19,28 +19,12 @@
         android:hint="검색어를 입력해주세요."
         android:inputType="textPersonName"
         android:imeOptions="actionSearch"
-        app:layout_constraintEnd_toStartOf="@+id/add_button"
+        app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/result_text"
-        android:layout_width="80dp"
-        android:layout_height="629dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginEnd="337dp"
-        android:layout_marginRight="337dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.011"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todo_edit"
-        app:layout_constraintVertical_bias="0.05" />
-
     <ImageButton
-        android:id="@+id/add_button"
+        android:id="@+id/searchButton"
         android:layout_width="49dp"
         android:layout_height="45dp"
         android:layout_marginTop="16dp"
@@ -49,5 +33,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_search" />
+
+
+    <TextView
+        android:id="@+id/historySwitchLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="검색어 저장"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchEdit"
+        />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/historySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@id/historySwitchLabel"
+        app:layout_constraintTop_toBottomOf="@+id/searchEdit"
+        android:checked="true"
+        />
+
+    <TextView
+        android:id="@+id/clearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
+        android:text="전체삭제"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historyRcv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historySwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

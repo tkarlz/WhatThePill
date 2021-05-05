@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class PillListRvAdapter(val context: Context, val pillList: List<PillInfo>, val itemClick: (PillInfo) -> Unit) :
+class PillListRvAdapter(val context: Context, private val pillList: List<PillInfo>, val itemClick: (PillInfo) -> Unit) :
     RecyclerView.Adapter<PillListRvAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.pill_list_rv_item, parent, false)
-        return Holder(view, itemClick)
+        return Holder(view)
     }
 
     override fun getItemCount(): Int {
@@ -23,15 +23,14 @@ class PillListRvAdapter(val context: Context, val pillList: List<PillInfo>, val 
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-
-        holder?.bind(pillList[position], context)
+        holder.bind(pillList[position], context)
     }
 
-    inner class Holder(itemView: View?, itemClick: (PillInfo) -> Unit) : RecyclerView.ViewHolder(itemView!!) {
-        val pillImage = itemView?.findViewById<ImageView>(R.id.pillImage)
-        val pillNmae = itemView?.findViewById<TextView>(R.id.pillNameTv)
-        val pillIngredient = itemView?.findViewById<TextView>(R.id.pillIngredientTv)
-        val pillCompany = itemView?.findViewById<TextView>(R.id.pillCompanyTv)
+    inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+        private val pillImage = itemView?.findViewById<ImageView>(R.id.pillImage)
+        private val pillNmae = itemView?.findViewById<TextView>(R.id.pillNameTv)
+        private val pillIngredient = itemView?.findViewById<TextView>(R.id.pillIngredientTv)
+        private val pillCompany = itemView?.findViewById<TextView>(R.id.pillCompanyTv)
 
         fun bind (pill: PillInfo, context: Context) {
             if (pill.image != "") {
