@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.pill.what">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
 
     <application
         android:name=".GlobalVariable"
@@ -14,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.WhatThePill">
+        android:theme="@style/Theme.WhatThePill"
+        android:requestLegacyExternalStorage="true">
         <activity android:name=".PillInfoActivity" />
         <activity android:name=".PillListActivity" />
         <activity android:name=".MainActivity">
@@ -25,6 +30,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchActivity" />
+        <provider
+            android:authorities="com.pill.what.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>
