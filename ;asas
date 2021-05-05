@@ -1,0 +1,79 @@
+[33mcommit 5497372ba1f038ae50025d3f39d66272656697dd[m[33m ([m[1;36mHEAD -> [m[1;32msangwoong62[m[33m, [m[1;31morigin/sangwoong62[m[33m)[m
+Author: sangwoong62 <sangwoong62@gmail.com>
+Date:   Wed May 5 12:41:21 2021 +0900
+
+    메인 액티비티에 카메라 권한요청및 촬영기능 추가
+
+[33mcommit 5bd300da43e3aeacc0b888d09802a681b72f1bbd[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: 2231426 f543a68
+Author: tkarlz <tjdudrb97@gmail.com>
+Date:   Wed Apr 28 10:42:08 2021 +0900
+
+    merge sangwon & modify crawlingData code and data print
+
+[33mcommit 2231426f59547e1345b32c525fc917ecfe20ae8a[m
+Author: tkarlz <tjdudrb97@gmail.com>
+Date:   Tue Apr 27 13:06:42 2021 +0900
+
+    crawling pill data
+
+[33mcommit f543a68f22fd705cc986ba249daa2c0312f01d1b[m
+Author: yeondu27 <smiletor27@naver.com>
+Date:   Tue Apr 27 13:01:05 2021 +0900
+
+    load image url & PillInfoActivity design
+
+[33mcommit 4fc04f78fc9e07336676a34dd13073f57a45097b[m
+Author: tkarlz <tjdudrb97@gmail.com>
+Date:   Thu Apr 22 17:10:47 2021 +0900
+
+    Insert pill data & make data into global variable
+
+[33mcommit cbc577643a1ba1effee2dbd0e3658934193f0864[m
+Author: tkarlz <tjdudrb97@gmail.com>
+Date:   Wed Apr 21 20:23:49 2021 +0900
+
+    change App gradle & rename package
+
+[33mcommit a9c77d9887a0e2c8f1db690c2b8728cb677c0c16[m
+Merge: 99aebb4 26ab79d
+Author: tkarlz <tjdudrb97@gmail.com>
+Date:   Wed Apr 21 16:00:11 2021 +0900
+
+    sangwoong
+
+[33mcommit 99aebb4ab5124807955e075dd5bb81bd6f1b0e92[m
+Author: tkarlz <tjdudrb97@gmail.com>
+Date:   Wed Apr 21 15:08:14 2021 +0900
+
+    merge sangwon
+
+[33mcommit 26ab79d0bacbce979b85d61bd0501055c75f7bf5[m
+Author: sangwoong62 <sangwoong62@gmail.com>
+Date:   Wed Apr 21 13:20:54 2021 +0900
+
+    최근검색기록저장기능 (텍스트뷰를 스크롤뷰나 리사이클러뷰로 바꿔야함)
+
+[33mcommit 0ed3eaef4a7fb32fa1725f7417f890c40c082b11[m
+Author: yeondu27 <smiletor27@naver.com>
+Date:   Wed Apr 21 12:43:18 2021 +0900
+
+    메인 및 검색 결과화면 인터페이스
+
+[33mcommit 9b95fb4fcd76c7f38cf4aa48077bd8c1701bcbf3[m
+Author: yeondu27 <smiletor27@naver.com>
+Date:   Thu Apr 8 09:34:07 2021 +0900
+
+    검색바 인터페이스 및 기능 구현
+
+[33mcommit b514792f45446eee09bb479b3179fd1c0f72434f[m
+Author: yeondu27 <smiletor27@naver.com>
+Date:   Wed Mar 31 19:32:03 2021 +0900
+
+    sangwon
+
+[33mcommit e468e3bdeef2a7fe1fd8acb4d348a7b2b9da0564[m
+Author: yeondu27 <smiletor27@naver.com>
+Date:   Wed Mar 24 16:44:08 2021 +0900
+
+    init
