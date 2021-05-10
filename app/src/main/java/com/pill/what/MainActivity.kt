@@ -3,13 +3,13 @@ package com.pill.what
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
-
 class MainActivity : AppCompatActivity() {
+    private lateinit var cameraSettings: CameraSettings
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,16 +21,16 @@ class MainActivity : AppCompatActivity() {
             setDisplayUseLogoEnabled(true)
             setLogo(R.drawable.ic_baseline_medical_services_24)
         }
+
+        cameraSettings = CameraSettings(this)
     }
 
     fun cameraButton(view: View){
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivity(intent)
+        cameraSettings.cameraLaunch()
     }
 
     fun imageLoadButton(view: View){
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivity(intent)
+        cameraSettings.galleryLaunch()
     }
 
     fun searchButton(view: View){
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(nextIntent)
     }
 
-    fun KPICButton(view: View) { //약학 정보원 이동
+    fun kpicButton(view: View) { //약학 정보원 이동
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.health.kr/"))
         startActivity(intent)
     }
