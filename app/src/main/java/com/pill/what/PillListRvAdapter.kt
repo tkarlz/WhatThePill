@@ -33,6 +33,7 @@ class PillListRvAdapter(val context: Context, val pillList: List<PillInfo>, val 
         val pillIngredient = itemView?.findViewById<TextView>(R.id.pillIngredientTv)
         val pillCompany = itemView?.findViewById<TextView>(R.id.pillCompanyTv)
 
+
         fun bind (pill: PillInfo, context: Context) {
             if (pill.image != "") {
 
@@ -50,6 +51,7 @@ class PillListRvAdapter(val context: Context, val pillList: List<PillInfo>, val 
             pillNmae?.text = pill.name
             pillIngredient?.text = pill.ingredient
             pillCompany?.text = pill.company
+
 
             itemView.setOnClickListener { itemClick(pill) }
         }
