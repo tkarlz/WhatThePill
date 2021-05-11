@@ -34,17 +34,12 @@ class PillListRvAdapter(val context: Context, private val pillList: List<PillInf
 
         fun bind (pill: PillInfo, context: Context) {
             if (pill.image != "") {
-
                 Glide.with(context).load(pill.image).into(pillImage!!)
-
-               // val resourceId = context.resources.getIdentifier(pill.image, "drawable", context.packageName)
-                //pillImage?.setImageResource(resourceId)
             } else {
                 Glide.with(context)
                         .load(pill.image)
                         .error(R.drawable.ic_launcher_foreground) // ex) error(R.drawable.error)
                         .into(pillImage!!)
-                //pillImage?.setImageResource(R.mipmap.ic_launcher)
             }
             pillNmae?.text = pill.name
             pillIngredient?.text = pill.ingredient
