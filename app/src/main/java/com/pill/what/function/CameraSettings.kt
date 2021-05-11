@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.function
 
 import android.app.Activity
 import android.content.Intent
@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
+import com.pill.what.MainActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

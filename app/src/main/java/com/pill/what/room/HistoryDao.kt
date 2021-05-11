@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

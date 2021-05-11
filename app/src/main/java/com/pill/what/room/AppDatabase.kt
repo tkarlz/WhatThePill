@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.room
 
 import android.content.Context
 import androidx.room.Database
@@ -12,7 +12,7 @@ import androidx.room.RoomDatabase
         companion object{
             private var INSTANCE: AppDatabase? = null
             @Synchronized
-            fun getInstance(context: Context): AppDatabase{
+            fun getInstance(context: Context): AppDatabase {
                 if (INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(
                             context,

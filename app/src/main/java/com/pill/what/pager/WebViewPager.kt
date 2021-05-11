@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.pager
 
 import android.graphics.Color
 import android.os.Bundle
@@ -8,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.TextView
+import com.pill.what.R
 
 
-class WebViewPager(val data: String, val title: String) : Fragment() {
+class WebViewPager(val data: String, private val title: String) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

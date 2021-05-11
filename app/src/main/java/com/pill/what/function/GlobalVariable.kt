@@ -1,7 +1,9 @@
-package com.pill.what
+package com.pill.what.function
 
 import android.app.Application
 import com.google.gson.Gson
+import com.pill.what.data.PillData
+import com.pill.what.data.PillInfo
 
 class GlobalVariable: Application() {
     companion object {

@@ -1,8 +1,11 @@
-package com.pill.what
+package com.pill.what.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.pill.what.pager.TextViewPager
+import com.pill.what.pager.WebViewPager
+import com.pill.what.data.DetailedData
 
 class FragmentAdapter (fm : FragmentManager, val data: DetailedData): FragmentPagerAdapter(fm) {
     //position 에 따라 원하는 Fragment로 이동시키기

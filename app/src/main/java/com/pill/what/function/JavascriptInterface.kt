@@ -1,6 +1,7 @@
-package com.pill.what
+package com.pill.what.function
 
 import android.webkit.JavascriptInterface
+import com.pill.what.data.DetailedData
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
@@ -21,10 +22,10 @@ class JavascriptInterface(private val crawlingData: CrawlingData) {
                 doc.select("#charact").text(),
                 doc.select("#cls_code").text(),
                 doc.select("#stmt").text(),
-                doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(1)").html(),
-                doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(2)").html() ,
-                doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(3)").html(),
-                doc.select("#mediguide").html())
+                doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(1)").html().replace("^<h4 class=.*</h4> \n".toRegex(), ""),
+                doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(2)").html().replace("^<h4 class=.*</h4> \n".toRegex(), ""),
+                doc.select("#druginfo02 > div:nth-child(3) > div:nth-child(3)").html().replace("^<h4 class=.*</h4> \n".toRegex(), ""),
+                doc.select("#mediguide").html().split("\n")[0].replace("^<br>".toRegex(), ""))
 
         crawlingData.intent.putExtra("data", detailedData)
         crawlingData.context.startActivity(crawlingData.intent)

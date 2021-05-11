@@ -1,7 +1,6 @@
-package com.pill.what
+package com.pill.what.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.pill.what.R
+import com.pill.what.data.PillInfo
 
 class PillListRvAdapter(val context: Context, private val pillList: List<PillInfo>, val itemClick: (PillInfo) -> Unit) :
     RecyclerView.Adapter<PillListRvAdapter.Holder>() {

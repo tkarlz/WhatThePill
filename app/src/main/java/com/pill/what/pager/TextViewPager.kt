@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.pager
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.pill.what.R
+import com.pill.what.data.DetailedData
 
 class TextViewPager(val data: DetailedData) : Fragment() {
     override fun onCreateView(

@@ -23,13 +23,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="제품명" />
 
                 <TextView
                     android:id="@+id/drugName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -45,13 +46,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="성분 / 함량" />
 
                 <TextView
                     android:id="@+id/drugIngredient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -67,13 +69,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="첨가제" />
 
                 <TextView
                     android:id="@+id/additives"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -89,13 +92,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="전문 / 일반" />
 
                 <TextView
                     android:id="@+id/professional"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -112,13 +116,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="제조 / 수입" />
 
                 <TextView
                     android:id="@+id/drugCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -134,13 +139,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="제형" />
 
                 <TextView
                     android:id="@+id/drugForm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -156,13 +162,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="투여경로" />
 
                 <TextView
                     android:id="@+id/howEat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -178,13 +185,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="성상" />
 
                 <TextView
                     android:id="@+id/appearance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -200,13 +208,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="식약처 분류" />
 
                 <TextView
                     android:id="@+id/classification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
 
@@ -222,13 +231,14 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="16sp"
+                    android:paddingBottom="5dp"
                     android:text="저장방법" />
 
                 <TextView
                     android:id="@+id/storeMethod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="내용" />
             </LinearLayout>
         </LinearLayout>

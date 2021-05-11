@@ -1,13 +1,12 @@
 package com.pill.what
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
-import android.util.Log
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
+import com.pill.what.adapter.FragmentAdapter
+import com.pill.what.data.DetailedData
 import kotlinx.android.synthetic.main.activity_pill_info.*
 
 class PillInfoActivity : AppCompatActivity() {

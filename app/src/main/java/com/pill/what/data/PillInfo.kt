@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.data
 
 data class PillInfo(
     var name: String,

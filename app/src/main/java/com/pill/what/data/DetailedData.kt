@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

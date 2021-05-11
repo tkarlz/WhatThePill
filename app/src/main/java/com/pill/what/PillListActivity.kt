@@ -3,12 +3,15 @@ package com.pill.what
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pill.what.GlobalVariable.Companion.pillInfo
+import com.pill.what.function.GlobalVariable.Companion.pillInfo
+import com.pill.what.adapter.PillListRvAdapter
+import com.pill.what.function.CrawlingData
+import com.pill.what.room.AppDatabase
+import com.pill.what.room.History
 import java.text.SimpleDateFormat
 import java.util.*
 
