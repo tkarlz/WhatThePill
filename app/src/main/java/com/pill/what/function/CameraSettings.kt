@@ -1,15 +1,16 @@
 package com.pill.what.function
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -18,11 +19,15 @@ import androidx.core.content.FileProvider
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.pill.what.MainActivity
+import com.pill.what.PillListActivity
+import com.pill.what.R
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class CameraSettings(val activity: MainActivity) {
     private lateinit var curPhotoPath: String
@@ -30,12 +35,26 @@ class CameraSettings(val activity: MainActivity) {
     private val galleryStartForResult: ActivityResultLauncher<Intent>
     private val takeCapture: Intent
     private val pickImage: Intent
+    private val dlg = Dialog(activity)
 
     init {
+        dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dlg.setContentView(R.layout.dialog_progress)
+        dlg.setCancelable(false)
+        dlg.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         cameraStartForResult = activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
-//            val intent = result.data
-                // TODO server communication
+                APICommunication(dlg).uploadImg(curPhotoPath) {
+                    val nextIntent = Intent(activity, PillListActivity::class.java)
+                    val json = JSONObject(it.trim('"').replace("\\", ""))
+                    nextIntent.putExtra("form", json.getString("form"))
+                    nextIntent.putExtra("print", json.getString("print"))
+                    nextIntent.putExtra("shape", json.getString("shape"))
+                    nextIntent.putExtra("color", json.getString("color"))
+                    nextIntent.putExtra("line", json.getString("line"))
+                    activity.startActivity(nextIntent)
+                }
             }
         }
 
@@ -43,7 +62,16 @@ class CameraSettings(val activity: MainActivity) {
             if (result.resultCode == Activity.RESULT_OK) {
                 val intent = result.data
                 saveImageFile(intent?.data!!)
-                // TODO server communication
+                APICommunication(dlg).uploadImg(curPhotoPath) {
+                    val nextIntent = Intent(activity, PillListActivity::class.java)
+                    val json = JSONObject(it.trim('"').replace("\\", ""))
+                    nextIntent.putExtra("form", json.getString("form"))
+                    nextIntent.putExtra("print", json.getString("print"))
+                    nextIntent.putExtra("shape", json.getString("shape"))
+                    nextIntent.putExtra("color", json.getString("color"))
+                    nextIntent.putExtra("line", json.getString("line"))
+                    activity.startActivity(nextIntent)
+                }
             }
         }
 
@@ -123,7 +151,7 @@ class CameraSettings(val activity: MainActivity) {
         val flist = activity.filesDir.listFiles { _, name ->
             name.endsWith(".jpg")
         }
-        flist.forEach {
+        flist?.forEach {
             it.delete()
         }
         val timestamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.KOREA).format(Date())

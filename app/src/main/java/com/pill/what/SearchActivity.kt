@@ -64,7 +64,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun startSearch(searchString: String) {
-        if(!searchString.isBlank()) {
+        if(searchString.isNotBlank()) {
             if(historySwitch.isChecked) {
                 val currentDateTime = Calendar.getInstance().time
                 val dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA).format(currentDateTime)
