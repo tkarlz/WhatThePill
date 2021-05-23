@@ -1,11 +1,17 @@
 package com.pill.what
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.webkit.WebView
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pill.what.function.GlobalVariable.Companion.pillInfo
@@ -14,6 +20,7 @@ import com.pill.what.adapter.PillListRvAdapter
 import com.pill.what.function.CrawlingData
 import com.pill.what.room.AppDatabase
 import com.pill.what.room.History
+import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,7 +45,6 @@ class PillListActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             setDisplayUseLogoEnabled(true)
             setLogo(R.drawable.ic_baseline_medical_services_24)
-
         }
 
         db = AppDatabase.getInstance(this)
@@ -82,5 +88,42 @@ class PillListActivity : AppCompatActivity() {
         val lm = LinearLayoutManager(this)
         rcv.layoutManager = lm
         rcv.setHasFixedSize(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle presses on the action bar items
+        return when(item.itemId){
+            R.id.action_btn1 -> {
+                showSettingPopup()
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+    private fun showSettingPopup() : Boolean{
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.filter_popup, null)
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("필터 검색")
+            .create()
+
+        val butSave = view.findViewById<Button>(R.id.searchFilter)
+        butSave.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        val butCancel = view.findViewById<Button>(R.id.cancleFilter)
+        butCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.setView(view)
+        alertDialog.show()
+
+        return true
     }
 }
