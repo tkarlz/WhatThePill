@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Window
@@ -16,12 +18,14 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
+import com.google.gson.Gson
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.pill.what.MainActivity
 import com.pill.what.PillListActivity
 import com.pill.what.R
-import org.json.JSONObject
+import com.pill.what.adapter.PillDataAdapter
+import com.pill.what.data.APIResultData
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -46,14 +50,14 @@ class CameraSettings(val activity: MainActivity) {
         cameraStartForResult = activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 APICommunication(dlg).uploadImg(curPhotoPath) {
-                    val nextIntent = Intent(activity, PillListActivity::class.java)
-                    val json = JSONObject(it.trim('"').replace("\\", ""))
-                    nextIntent.putExtra("form", json.getString("form"))
-                    nextIntent.putExtra("print", json.getString("print"))
-                    nextIntent.putExtra("shape", json.getString("shape"))
-                    nextIntent.putExtra("color", json.getString("color"))
-                    nextIntent.putExtra("line", json.getString("line"))
-                    activity.startActivity(nextIntent)
+                    if (it.length < 3) {
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(activity, "알약을 인식할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        val nextIntent = newIntentSettingExtra(it)
+                        activity.startActivity(nextIntent)
+                    }
                 }
             }
         }
@@ -63,14 +67,14 @@ class CameraSettings(val activity: MainActivity) {
                 val intent = result.data
                 saveImageFile(intent?.data!!)
                 APICommunication(dlg).uploadImg(curPhotoPath) {
-                    val nextIntent = Intent(activity, PillListActivity::class.java)
-                    val json = JSONObject(it.trim('"').replace("\\", ""))
-                    nextIntent.putExtra("form", json.getString("form"))
-                    nextIntent.putExtra("print", json.getString("print"))
-                    nextIntent.putExtra("shape", json.getString("shape"))
-                    nextIntent.putExtra("color", json.getString("color"))
-                    nextIntent.putExtra("line", json.getString("line"))
-                    activity.startActivity(nextIntent)
+                    if (it.length < 3) {
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(activity, "알약을 인식할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        val nextIntent = newIntentSettingExtra(it)
+                        activity.startActivity(nextIntent)
+                    }
                 }
             }
         }
@@ -109,6 +113,19 @@ class CameraSettings(val activity: MainActivity) {
         setGalleryPermission {
             galleryStartForResult.launch(pickImage)
         }
+    }
+
+    private fun newIntentSettingExtra(jsonString: String): Intent {
+        val intent = Intent(activity, PillListActivity::class.java)
+        Log.e("aaaa", jsonString)
+        val gson = Gson()
+
+        val dataList = gson.fromJson(jsonString, Array<APIResultData>::class.java).toList()
+        val data = PillDataAdapter().engToKor(dataList[0])
+
+        intent.putExtra("apiResult", data)
+
+        return intent
     }
 
     private fun setCameraPermission(launch: () -> Unit){
