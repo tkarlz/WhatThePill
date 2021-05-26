@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="145dp"
+    android:id="@+id/card_view"
+    android:layout_marginVertical="5dp"
+    card_view:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/item_border"
+        android:backgroundTint="@color/colorPrimary">
+
+
+        <ImageView
+            android:id="@+id/pillImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            card_view:layout_constraintRight_toLeftOf="@id/pillColor" />
+
+        <TextView
+            android:id="@+id/pillFormHead"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="제형 "
+            android:gravity="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pillImage" />
+
+        <TextView
+            android:id="@+id/pillForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/pillFormHead"
+            tools:text="formulation" />
+
+        <TextView
+            android:id="@+id/pillLineHead"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="분할선 "
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf ="@+id/pillFormHead"
+            app:layout_constraintStart_toEndOf="@+id/pillImage" />
+
+        <TextView
+            android:id="@+id/pillLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/pillLineHead"
+            app:layout_constraintTop_toBottomOf="@+id/pillForm"
+            tools:text="dividing line" />
+
+        <TextView
+            android:id="@+id/pillShapeHead"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="모양 "
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf ="@+id/pillLineHead"
+            app:layout_constraintStart_toEndOf="@+id/pillImage" />
+
+        <TextView
+            android:id="@+id/pillShape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/pillShapeHead"
+            app:layout_constraintTop_toBottomOf="@+id/pillLine"
+            tools:text="shape" />
+
+        <TextView
+            android:id="@+id/pillColorHead"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="색상 "
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf ="@+id/pillShapeHead"
+            app:layout_constraintStart_toEndOf="@+id/pillImage" />
+
+        <TextView
+            android:id="@+id/pillColor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/pillColorHead"
+            app:layout_constraintTop_toBottomOf="@+id/pillShape"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            tools:text="color" />
+
+        <TextView
+            android:id="@+id/pillPrintHead"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="식별문자 "
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf ="@+id/pillColorHead"
+            app:layout_constraintStart_toEndOf="@+id/pillImage" />
+
+        <TextView
+            android:id="@+id/pillPrint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/pillPrintHead"
+            app:layout_constraintTop_toBottomOf="@+id/pillColor"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            tools:text="print" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

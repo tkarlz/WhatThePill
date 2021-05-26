@@ -48,6 +48,9 @@ class PillDataAdapter {
                 "black" -> "검정"
                 else -> ""
             }
+        }.filter { it.isNotBlank() })
+        newData.prints = ArrayList(data.prints.filter {
+            it.isNotBlank()
         })
 
         return newData

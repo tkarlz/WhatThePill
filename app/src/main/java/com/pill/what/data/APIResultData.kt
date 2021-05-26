@@ -13,7 +13,7 @@ data class APIResultData(
     @SerializedName("shape")
     var shape: String?,
     @SerializedName("color")
-    var colors: ArrayList<String>,
+    var colors: ArrayList<String?>,
     @SerializedName("character")
     var prints: ArrayList<String>,
     @SerializedName("base64img")

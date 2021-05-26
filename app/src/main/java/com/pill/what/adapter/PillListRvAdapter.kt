@@ -28,7 +28,7 @@ class PillListRvAdapter(val context: Context, private val pillList: List<PillInf
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         private val pillImage = itemView?.findViewById<ImageView>(R.id.pillImage)
-        private val pillNmae = itemView?.findViewById<TextView>(R.id.pillNameTv)
+        private val pillName = itemView?.findViewById<TextView>(R.id.pillNameTv)
         private val pillIngredient = itemView?.findViewById<TextView>(R.id.pillIngredientTv)
         private val pillCompany = itemView?.findViewById<TextView>(R.id.pillCompanyTv)
 
@@ -41,7 +41,7 @@ class PillListRvAdapter(val context: Context, private val pillList: List<PillInf
                         .error(R.drawable.ic_launcher_foreground) // ex) error(R.drawable.error)
                         .into(pillImage!!)
             }
-            pillNmae?.text = pill.name
+            pillName?.text = pill.name
             pillIngredient?.text = pill.ingredient
             pillCompany?.text = pill.company
 

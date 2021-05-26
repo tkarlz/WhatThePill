@@ -1,5 +1,6 @@
 package com.pill.what
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,9 +14,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SearchActivity : AppCompatActivity() {
-    object SwitchChecked {
-        var value: Boolean? = null
-    }
 
     private lateinit var db: AppDatabase
 
@@ -41,9 +39,10 @@ class SearchActivity : AppCompatActivity() {
             startSearch(searchEdit.text.toString())
         }
 
-        SwitchChecked.value = historySwitch.isChecked
+        val pref = getSharedPreferences("pref", Context.MODE_PRIVATE)
+        historySwitch.isChecked = pref.getBoolean("save", true)
         historySwitch.setOnCheckedChangeListener { _, isChecked ->
-            SwitchChecked.value = isChecked
+            pref.edit().putBoolean("save", isChecked).apply()
         }
 
         clearButton.setOnClickListener {

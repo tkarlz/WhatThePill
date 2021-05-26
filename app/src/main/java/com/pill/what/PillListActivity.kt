@@ -72,7 +72,7 @@ class PillListActivity : AppCompatActivity() {
         val mAdapter = PillListRvAdapter(this, pillList) { pill ->
             val nextIntent = Intent(this@PillListActivity, PillInfoActivity::class.java)
             val webView: WebView = findViewById(R.id.webView)
-            if(SearchActivity.SwitchChecked.value!!) {
+            if(getSharedPreferences("pref", Context.MODE_PRIVATE).getBoolean("save", true)) {
                 val currentDateTime = Calendar.getInstance().time
                 val dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.KOREA).format(currentDateTime)
                 db.historyDao().insert(History(pill.name, dateFormat))
@@ -143,7 +143,7 @@ class PillListActivity : AppCompatActivity() {
             data.color1
         }
         result?.colors?.forEach {
-            if(!dataColor.contains(it)) {
+            if(!dataColor.contains(it!!)) {
                 isContains = false
                 return@forEach
             }

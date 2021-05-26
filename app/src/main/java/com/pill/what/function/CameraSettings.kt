@@ -21,10 +21,9 @@ import androidx.core.content.FileProvider
 import com.google.gson.Gson
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
+import com.pill.what.PillImageListActivity
 import com.pill.what.MainActivity
-import com.pill.what.PillListActivity
 import com.pill.what.R
-import com.pill.what.adapter.PillDataAdapter
 import com.pill.what.data.APIResultData
 import java.io.File
 import java.io.FileOutputStream
@@ -49,16 +48,7 @@ class CameraSettings(val activity: MainActivity) {
 
         cameraStartForResult = activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
-                APICommunication(dlg).uploadImg(curPhotoPath) {
-                    if (it.length < 3) {
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(activity, "알약을 인식할 수 없습니다.", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        val nextIntent = newIntentSettingExtra(it)
-                        activity.startActivity(nextIntent)
-                    }
-                }
+                apiCommAndStartIntent()
             }
         }
 
@@ -66,16 +56,7 @@ class CameraSettings(val activity: MainActivity) {
             if (result.resultCode == Activity.RESULT_OK) {
                 val intent = result.data
                 saveImageFile(intent?.data!!)
-                APICommunication(dlg).uploadImg(curPhotoPath) {
-                    if (it.length < 3) {
-                        Handler(Looper.getMainLooper()).post {
-                            Toast.makeText(activity, "알약을 인식할 수 없습니다.", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        val nextIntent = newIntentSettingExtra(it)
-                        activity.startActivity(nextIntent)
-                    }
-                }
+                apiCommAndStartIntent()
             }
         }
 
@@ -115,17 +96,22 @@ class CameraSettings(val activity: MainActivity) {
         }
     }
 
-    private fun newIntentSettingExtra(jsonString: String): Intent {
-        val intent = Intent(activity, PillListActivity::class.java)
-        Log.e("aaaa", jsonString)
-        val gson = Gson()
+    private fun apiCommAndStartIntent() {
+        APICommunication(dlg).uploadImg(curPhotoPath) {
+            if (it.length < 3) {
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(activity, "알약을 인식할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                val nextIntent = Intent(activity, PillImageListActivity::class.java)
+                Log.e("aaaa", it)
+                val gson = Gson()
+                val dataList = ArrayList(gson.fromJson(it, Array<APIResultData>::class.java).toList())
 
-        val dataList = gson.fromJson(jsonString, Array<APIResultData>::class.java).toList()
-        val data = PillDataAdapter().engToKor(dataList[0])
-
-        intent.putExtra("apiResult", data)
-
-        return intent
+                nextIntent.putParcelableArrayListExtra("apiResult", dataList)
+                activity.startActivity(nextIntent)
+            }
+        }
     }
 
     private fun setCameraPermission(launch: () -> Unit){
