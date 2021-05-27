@@ -2,7 +2,6 @@ package com.pill.what.function
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -13,9 +12,8 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.Window
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -138,22 +136,15 @@ class CameraSettings(private val activity: MainActivity) {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
     }
 
-    private fun showGuidePopup(execute: () -> Unit) : Boolean{
-        val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.camera_popup, null)
+    private fun showGuidePopup(execute: () -> Unit) {
+        val guideDialog = AlertDialog.Builder(activity, R.style.Theme_AppCompat_Light_Dialog_Alert)
+            .setTitle(R.string.guide_name)
+            .setMessage("식별문자가 보이게 찍어주세요.")
+            .setPositiveButton("확인") { _, _ ->
+                execute()
+            }
+            .show()
 
-        val alertDialog = AlertDialog.Builder(activity)
-            .setTitle("카메라 이용방법")
-            .create()
-
-        val butConfirm = view.findViewById<Button>(R.id.cameraFilter)
-        butConfirm.setOnClickListener {
-            execute()
-            alertDialog.dismiss()
-        }
-        alertDialog.setView(view)
-        alertDialog.show()
-
-        return true
+        guideDialog.findViewById<TextView>(android.R.id.message)?.textSize = 20F
     }
 }
