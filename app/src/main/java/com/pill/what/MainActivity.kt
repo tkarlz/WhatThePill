@@ -1,9 +1,13 @@
 package com.pill.what
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.pill.what.function.CameraSettings
 
@@ -26,7 +30,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun cameraButton(view: View){
-        cameraSettings.cameraLaunch()
+        showSettingPopup()
+
     }
 
     fun imageLoadButton(view: View){
@@ -41,6 +46,25 @@ class MainActivity : AppCompatActivity() {
     fun kpicButton(view: View) { //약학 정보원 이동
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.health.kr/"))
         startActivity(intent)
+    }
+
+    private fun showSettingPopup() : Boolean{
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.camera_popup, null)
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("카메라 이용방법")
+            .create()
+
+        val butCancel = view.findViewById<Button>(R.id.cameraFilter)
+        butCancel.setOnClickListener {
+            cameraSettings.cameraLaunch()
+            alertDialog.dismiss()
+        }
+        alertDialog.setView(view)
+        alertDialog.show()
+
+        return true
     }
 }
 

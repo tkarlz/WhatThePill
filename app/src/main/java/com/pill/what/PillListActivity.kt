@@ -2,35 +2,66 @@ package com.pill.what
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.webkit.WebView
+import android.widget.Adapter
 import android.widget.Button
 import android.widget.TextView
+import android.widget.ToggleButton
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pill.what.function.GlobalVariable.Companion.pillInfo
-import com.pill.what.function.GlobalVariable.Companion.pillData
+import com.pill.what.adapter.FilterColorRvAdapter
 import com.pill.what.adapter.PillListRvAdapter
 import com.pill.what.function.CrawlingData
+import com.pill.what.function.GlobalVariable.Companion.pillData
+import com.pill.what.function.GlobalVariable.Companion.pillInfo
 import com.pill.what.room.AppDatabase
 import com.pill.what.room.History
 import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+data class FilterColor(
+    val color: Int,
+    val name: String
+)
 
 class PillListActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
 
+    private lateinit var filterColorList: List<FilterColor>
+    private var filteredColorList = mutableListOf<FilterColor>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pill_list)
+
+        filterColorList = listOf(
+            FilterColor(ContextCompat.getColor(this, R.color.colorWhite), "하양"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorYellow), "노랑"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorOrange), "주황"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorPink), "분홍"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorRed), "빨강"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorBrown), "갈색"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorLightGreen), "연두"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorGreen), "초록"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorTurquoise), "청록"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorBlue), "파랑"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorIndigo), "남색"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorAmethyst), "자주"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorPurple), "보라"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorGray), "회색"),
+            FilterColor(ContextCompat.getColor(this, R.color.colorBlack), "검정")
+        )
 
         val name = intent.getStringExtra("name")
         val form = intent.getStringExtra("form")
@@ -90,6 +121,10 @@ class PillListActivity : AppCompatActivity() {
         rcv.setHasFixedSize(true)
     }
 
+
+
+
+    // filter button
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
@@ -105,6 +140,8 @@ class PillListActivity : AppCompatActivity() {
             }
         }
     }
+
+    // filter popup
     private fun showSettingPopup() : Boolean{
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.filter_popup, null)
@@ -113,17 +150,33 @@ class PillListActivity : AppCompatActivity() {
             .setTitle("필터 검색")
             .create()
 
+        val prevList = filteredColorList.toMutableList()
+
         val butSave = view.findViewById<Button>(R.id.searchFilter)
+        initRecyclerView(view)
         butSave.setOnClickListener {
             alertDialog.dismiss()
         }
         val butCancel = view.findViewById<Button>(R.id.cancleFilter)
         butCancel.setOnClickListener {
+            filteredColorList = prevList
             alertDialog.dismiss()
         }
         alertDialog.setView(view)
         alertDialog.show()
 
         return true
+    }
+
+    private fun initRecyclerView(view: View) {
+        val recyclerView: RecyclerView = view.findViewById(R.id.filterColorRecyclerView)
+        val lm = GridLayoutManager(this, 5)
+        val mAdapter = FilterColorRvAdapter(filterColorList, filteredColorList)
+
+        recyclerView.apply {
+            layoutManager = lm
+            adapter = mAdapter
+            setHasFixedSize(true)
+        }
     }
 }
