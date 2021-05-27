@@ -2,30 +2,26 @@ package com.pill.what
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
-import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pill.what.function.GlobalVariable.Companion.pillInfo
-import com.pill.what.function.GlobalVariable.Companion.pillData
+import com.pill.what.adapter.PillDataAdapter
 import com.pill.what.adapter.PillListRvAdapter
 import com.pill.what.data.APIResultData
-import com.pill.what.data.PillData
 import com.pill.what.function.CrawlingData
+import com.pill.what.function.GlobalVariable.Companion.pillData
+import com.pill.what.function.GlobalVariable.Companion.pillInfo
 import com.pill.what.room.AppDatabase
 import com.pill.what.room.History
 import kotlinx.android.synthetic.main.activity_search.*
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class PillListActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
@@ -57,13 +53,14 @@ class PillListActivity : AppCompatActivity() {
 
         db = AppDatabase.getInstance(this)
 
+        val pda = PillDataAdapter()
         val pillList = when(name) {
             null -> {
                 val filterName = pillData.filter { data ->
                     data.forms == result?.form && data.shapes == result?.shape &&
-                            colorCompare(data) &&
+                            pda.colorCompare(data, result) &&
                             (data.line_front == result?.line || data.line_back == result?.line) &&
-                            printCompare(data)
+                            pda.printCompare(data, result)
                 }.map { it.name }
                 pillInfo.filter { it.name in filterName }
             }
@@ -106,61 +103,11 @@ class PillListActivity : AppCompatActivity() {
         // Handle presses on the action bar items
         return when(item.itemId){
             R.id.action_btn1 -> {
-                showSettingPopup()
+                FilterPopup(this).showFilterPopup()
             }
             else -> {
                 super.onOptionsItemSelected(item)
             }
         }
-    }
-    private fun showSettingPopup() : Boolean {
-        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.filter_popup, null)
-
-        val alertDialog = AlertDialog.Builder(this)
-            .setTitle("필터 검색")
-            .create()
-
-        val butSave = view.findViewById<Button>(R.id.searchFilter)
-        butSave.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        val butCancel = view.findViewById<Button>(R.id.cancleFilter)
-        butCancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
-        alertDialog.setView(view)
-        alertDialog.show()
-
-        return true
-    }
-
-    private fun colorCompare(data: PillData): Boolean {
-        var isContains = true
-        val dataColor = if (data.color2.isBlank()) {
-            "${data.color1}, ${data.color2}"
-        } else {
-            data.color1
-        }
-        result?.colors?.forEach {
-            if(!dataColor.contains(it!!)) {
-                isContains = false
-                return@forEach
-            }
-        }
-
-        return isContains
-    }
-    private fun printCompare(data: PillData): Boolean {
-        var isContains = true
-        result?.prints?.forEach {
-            if(!data.print_front.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", "")) &&
-                !data.print_back.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", ""))) {
-                isContains = false
-                return@forEach
-            }
-        }
-
-        return isContains
     }
 }

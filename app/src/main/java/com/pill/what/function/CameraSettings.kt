@@ -2,6 +2,7 @@ package com.pill.what.function
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -12,17 +13,18 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Window
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import com.google.gson.Gson
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
-import com.pill.what.PillImageListActivity
 import com.pill.what.MainActivity
+import com.pill.what.PillImageListActivity
 import com.pill.what.R
 import com.pill.what.data.APIResultData
 import java.io.File
@@ -32,13 +34,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CameraSettings(val activity: MainActivity) {
+class CameraSettings(private val activity: MainActivity) {
     private lateinit var curPhotoPath: String
     private val cameraStartForResult: ActivityResultLauncher<Intent>
     private val galleryStartForResult: ActivityResultLauncher<Intent>
     private val takeCapture: Intent
     private val pickImage: Intent
     private val dlg = Dialog(activity)
+    private val setPermission = PermissionSettings(activity)
 
     init {
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -85,13 +88,15 @@ class CameraSettings(val activity: MainActivity) {
     }
 
     fun cameraLaunch() {
-        setCameraPermission {
-            cameraStartForResult.launch(takeCapture)
+        setPermission.camera {
+            showGuidePopup {
+                cameraStartForResult.launch(takeCapture)
+            }
         }
     }
 
     fun galleryLaunch() {
-        setGalleryPermission {
+        setPermission.gallery {
             galleryStartForResult.launch(pickImage)
         }
     }
@@ -114,42 +119,6 @@ class CameraSettings(val activity: MainActivity) {
         }
     }
 
-    private fun setCameraPermission(launch: () -> Unit){
-        val permission = object : PermissionListener {
-            override fun onPermissionGranted() {
-                launch()
-            }
-
-            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                Toast.makeText(activity, "카메라 사용 권한이 거부 되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-        TedPermission.with(activity)
-            .setPermissionListener(permission)
-            .setRationaleMessage("카메라를 사용하시려면 권한을 허용해주세요.")
-            .setDeniedMessage("권한을 거부하셨습니다. [앱 설정] -> [권한] 항목에서 허용해주세요.")
-            .setPermissions(android.Manifest.permission.CAMERA)
-            .check()
-    }
-
-    private fun setGalleryPermission(launch: () -> Unit){
-        val permission = object : PermissionListener {
-            override fun onPermissionGranted() {
-                launch()
-            }
-
-            override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                Toast.makeText(activity, "갤러리 접근 권한이 거부 되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-        TedPermission.with(activity)
-            .setPermissionListener(permission)
-            .setRationaleMessage("갤러리에 접근하시려면 권한을 허용해주세요.")
-            .setDeniedMessage("권한을 거부하셨습니다. [앱 설정] -> [권한] 항목에서 허용해주세요.")
-            .setPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            .check()
-    }
-
     private fun createImageFile(): File? {
         val flist = activity.filesDir.listFiles { _, name ->
             name.endsWith(".jpg")
@@ -167,5 +136,24 @@ class CameraSettings(val activity: MainActivity) {
         val bitmap = BitmapFactory.decodeStream(activity.contentResolver.openInputStream(uri))
         val out = FileOutputStream(curPhotoPath)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+    }
+
+    private fun showGuidePopup(execute: () -> Unit) : Boolean{
+        val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.camera_popup, null)
+
+        val alertDialog = AlertDialog.Builder(activity)
+            .setTitle("카메라 이용방법")
+            .create()
+
+        val butConfirm = view.findViewById<Button>(R.id.cameraFilter)
+        butConfirm.setOnClickListener {
+            execute()
+            alertDialog.dismiss()
+        }
+        alertDialog.setView(view)
+        alertDialog.show()
+
+        return true
     }
 }

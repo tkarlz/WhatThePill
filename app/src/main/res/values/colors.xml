@@ -3,4 +3,20 @@
     <color name="colorPrimary">#FFFFFFFF</color>
     <color name="colorPrimaryVariant">#000000</color>
     <color name="colorAccent">#0ED145</color>>
+    //filter button color
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorYellow">#FFFF00</color>
+    <color name="colorOrange">#FFA500</color>
+    <color name="colorPink">#FFC0CB</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorBrown">#A52A2A</color>
+    <color name="colorLightGreen">#90EE90</color>
+    <color name="colorGreen">#00FF00</color>
+    <color name="colorTurquoise">#40E0D0</color>
+    <color name="colorBlue">#0000FF</color>
+    <color name="colorIndigo">#4B0082</color>
+    <color name="colorAmethyst">#9966CC</color>
+    <color name="colorPurple">#800080</color>
+    <color name="colorGray">#808080</color>
+    <color name="colorBlack">#000000</color>
 </resources>

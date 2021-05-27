@@ -1,6 +1,7 @@
 package com.pill.what.adapter
 
 import com.pill.what.data.APIResultData
+import com.pill.what.data.PillData
 
 class PillDataAdapter {
     fun engToKor(data: APIResultData): APIResultData {
@@ -54,5 +55,35 @@ class PillDataAdapter {
         })
 
         return newData
+    }
+
+    fun colorCompare(data: PillData, result: APIResultData?): Boolean {
+        var isContains = true
+        val dataColor = if (data.color2.isBlank()) {
+            "${data.color1}, ${data.color2}"
+        } else {
+            data.color1
+        }
+        result?.colors?.forEach {
+            if(!dataColor.contains(it!!)) {
+                isContains = false
+                return@forEach
+            }
+        }
+
+        return isContains
+    }
+    fun printCompare(data: PillData, result: APIResultData?): Boolean {
+        var isContains = true
+        result?.prints?.forEach {
+            if (!data.print_front.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", "")) &&
+                !data.print_back.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", ""))
+            ) {
+                isContains = false
+                return@forEach
+            }
+        }
+
+        return isContains
     }
 }

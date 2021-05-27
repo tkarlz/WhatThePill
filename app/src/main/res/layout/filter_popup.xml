@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20dp"
                 android:text="식별문자" />
 
             <EditText
@@ -40,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20dp"
                 android:text="제형" />
 
             <Spinner
@@ -59,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20dp"
                 android:text="모양" />
 
             <Spinner
@@ -72,19 +75,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:textSize="20dp"
                 android:text="색상" />
 
-            <Spinner
-                android:id="@+id/spinner3"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/filterColorRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="match_parent"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -97,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20dp"
                 android:text="분할선" />
 
             <Spinner
@@ -119,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20dp"
                 android:text="검색" />
 
             <Button
@@ -126,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20dp"
                 android:text="취소" />
         </LinearLayout>
     </LinearLayout>
