@@ -1,4 +1,4 @@
-package com.pill.what
+package com.pill.what.popup
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.pill.what.R
 import com.pill.what.adapter.FilterColorRvAdapter
 import com.pill.what.data.FilterColor
 

@@ -1,7 +1,6 @@
 package com.pill.what.function
 
 import android.app.Dialog
-import android.util.Log
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody

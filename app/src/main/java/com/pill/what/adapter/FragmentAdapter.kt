@@ -23,7 +23,7 @@ class FragmentAdapter (fm : FragmentManager, val data: DetailedData): FragmentPa
     //tab의 개수만큼 return
     override fun getCount(): Int = 5
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
             0 -> "기본정보"
             1 -> "효능·효과"

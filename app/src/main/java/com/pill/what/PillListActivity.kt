@@ -17,6 +17,7 @@ import com.pill.what.data.APIResultData
 import com.pill.what.function.CrawlingData
 import com.pill.what.function.GlobalVariable.Companion.pillData
 import com.pill.what.function.GlobalVariable.Companion.pillInfo
+import com.pill.what.popup.FilterPopup
 import com.pill.what.room.AppDatabase
 import com.pill.what.room.History
 import kotlinx.android.synthetic.main.activity_search.*

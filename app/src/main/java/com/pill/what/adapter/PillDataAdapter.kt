@@ -5,7 +5,7 @@ import com.pill.what.data.PillData
 
 class PillDataAdapter {
     fun engToKor(data: APIResultData): APIResultData {
-        var newData: APIResultData = data
+        val newData: APIResultData = data
         newData.form = when(data.form) {
             "tablet" -> "정제"
             "hard capsule" -> "경질캡슐"

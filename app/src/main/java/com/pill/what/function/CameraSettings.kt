@@ -13,18 +13,19 @@ import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Window
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import com.google.gson.Gson
 import com.pill.what.MainActivity
 import com.pill.what.PillImageListActivity
+import com.pill.what.PillListActivity
 import com.pill.what.R
+import com.pill.what.adapter.PillDataAdapter
 import com.pill.what.data.APIResultData
+import com.pill.what.popup.GuidePopup
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -71,7 +72,7 @@ class CameraSettings(private val activity: MainActivity) {
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         activity,
-                        "com.pill.what.fileprovider",
+                        "com.pill.what.fileProvider",
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
@@ -87,7 +88,7 @@ class CameraSettings(private val activity: MainActivity) {
 
     fun cameraLaunch() {
         setPermission.camera {
-            showGuidePopup {
+            GuidePopup(activity).show {
                 cameraStartForResult.launch(takeCapture)
             }
         }
@@ -106,22 +107,28 @@ class CameraSettings(private val activity: MainActivity) {
                     Toast.makeText(activity, "알약을 인식할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                val nextIntent = Intent(activity, PillImageListActivity::class.java)
                 Log.e("aaaa", it)
                 val gson = Gson()
                 val dataList = ArrayList(gson.fromJson(it, Array<APIResultData>::class.java).toList())
 
-                nextIntent.putParcelableArrayListExtra("apiResult", dataList)
+                val nextIntent: Intent
+                if (dataList.size == 1){
+                    nextIntent = Intent(activity, PillListActivity::class.java)
+                    nextIntent.putExtra("apiResult", PillDataAdapter().engToKor(dataList[0]))
+                } else {
+                    nextIntent = Intent(activity, PillImageListActivity::class.java)
+                    nextIntent.putParcelableArrayListExtra("apiResult", dataList)
+                }
                 activity.startActivity(nextIntent)
             }
         }
     }
 
     private fun createImageFile(): File? {
-        val flist = activity.filesDir.listFiles { _, name ->
+        val fileList = activity.filesDir.listFiles { _, name ->
             name.endsWith(".jpg")
         }
-        flist?.forEach {
+        fileList?.forEach {
             it.delete()
         }
         val timestamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.KOREA).format(Date())
@@ -134,17 +141,5 @@ class CameraSettings(private val activity: MainActivity) {
         val bitmap = BitmapFactory.decodeStream(activity.contentResolver.openInputStream(uri))
         val out = FileOutputStream(curPhotoPath)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-    }
-
-    private fun showGuidePopup(execute: () -> Unit) {
-        val guideDialog = AlertDialog.Builder(activity, R.style.Theme_AppCompat_Light_Dialog_Alert)
-            .setTitle(R.string.guide_name)
-            .setMessage("식별문자가 보이게 찍어주세요.")
-            .setPositiveButton("확인") { _, _ ->
-                execute()
-            }
-            .show()
-
-        guideDialog.findViewById<TextView>(android.R.id.message)?.textSize = 20F
     }
 }
