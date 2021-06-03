@@ -74,16 +74,17 @@ class PillDataAdapter {
         return isContains
     }
     fun printCompare(data: PillData, result: APIResultData?): Boolean {
-        var isContains = true
+        var isContains = false
         result?.prints?.forEach {
-            if (!data.print_front.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", "")) &&
-                !data.print_back.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", ""))
+            if (data.print_front.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", "")) ||
+                data.print_back.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", ""))
             ) {
-                isContains = false
+                isContains = true
                 return@forEach
             }
         }
 
+        if(result?.prints == null || result.prints.size < 1) isContains=true
         return isContains
     }
 }

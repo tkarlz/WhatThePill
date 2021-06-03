@@ -10,13 +10,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.pill.what.PillListActivity
 import com.pill.what.R
 import com.pill.what.adapter.FilterColorRvAdapter
 import com.pill.what.data.APIResultData
 import com.pill.what.data.FilterColor
 import java.lang.Exception
 
-class FilterPopup(val activity: Activity, private val loadedPillData : APIResultData?) {
+class FilterPopup(private val activity: Activity, private val loadedPillData : APIResultData?) {
     private lateinit var view: View
 
     private var filterColorList: List<FilterColor> = listOf(
@@ -65,7 +66,7 @@ class FilterPopup(val activity: Activity, private val loadedPillData : APIResult
                 dividingLineSpinner.selectedItem.toString(),
                 shapeSpinner.selectedItem.toString(),
                 ArrayList(filteredColorList.map { it.name }),
-                ArrayList(prints.text.split(", ")),
+                ArrayList(prints.text.toString().trim().trim(',').replace(" ", "").split(",")),
                 ""
             ))
             activity.finish()
@@ -94,8 +95,6 @@ class FilterPopup(val activity: Activity, private val loadedPillData : APIResult
             adapter = mAdapter
             setHasFixedSize(true)
         }
-
-
     }
 
     private fun initFilterSpinner(spinnerId : Int, arrayId : Int): Spinner {
@@ -115,7 +114,7 @@ class FilterPopup(val activity: Activity, private val loadedPillData : APIResult
     private fun getPosition(spinnerId: Int): Int {
         if (loadedPillData == null) return 0
 
-        val result = when(spinnerId) {
+        return when (spinnerId) {
             R.id.formulationSpinner -> {
                 activity.resources.getStringArray(R.array.formulation).indexOf(loadedPillData.form)
             }
@@ -123,10 +122,10 @@ class FilterPopup(val activity: Activity, private val loadedPillData : APIResult
                 activity.resources.getStringArray(R.array.shape).indexOf(loadedPillData.shape)
             }
             R.id.dividingLineSpinner -> {
-                activity.resources.getStringArray(R.array.dividing_line).indexOf(loadedPillData.line)
+                activity.resources.getStringArray(R.array.dividing_line)
+                    .indexOf(loadedPillData.line)
             }
             else -> throw Exception()
         }
-        return result
     }
 }

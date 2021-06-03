@@ -35,7 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PillInfoActivity" />
+        <activity
+            android:name=".PillInfoActivity"
+            android:hardwareAccelerated="true" />
         <activity
             android:name=".PillListActivity"
             android:hardwareAccelerated="true" />

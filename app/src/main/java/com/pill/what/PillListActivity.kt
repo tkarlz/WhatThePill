@@ -87,6 +87,7 @@ class PillListActivity : AppCompatActivity() {
             itemSearch.text = "${displayText}로 검색한 결과"
             itemCount.text = "총 ${mAdapter.itemCount}건"
         }
+
         val rcv: RecyclerView = findViewById(R.id.mRecyclerView)
         rcv.adapter = mAdapter
 
@@ -97,7 +98,7 @@ class PillListActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
-        return true
+        return name == null
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle presses on the action bar items
