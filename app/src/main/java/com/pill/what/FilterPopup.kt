@@ -2,9 +2,14 @@ package com.pill.what
 
 import android.app.Activity
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.text.InputType
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -13,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pill.what.adapter.FilterColorRvAdapter
 import com.pill.what.data.APIResultData
 import com.pill.what.data.FilterColor
+import kotlinx.android.synthetic.main.activity_search.*
 import java.lang.Exception
 
 class FilterPopup(val activity: Activity, private val loadedPillData : APIResultData?) {
@@ -54,6 +60,16 @@ class FilterPopup(val activity: Activity, private val loadedPillData : APIResult
 
         val prints : EditText = view.findViewById(R.id.prints)
         prints.setText(loadedPillData?.prints?.joinToString(", "))
+        prints.imeOptions = EditorInfo.IME_ACTION_DONE
+        prints.setRawInputType(InputType.TYPE_CLASS_TEXT)
+        prints.setOnEditorActionListener { v, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val imm = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+                return@setOnEditorActionListener true
+            }
+            false
+        }
 
         val butSave = view.findViewById<Button>(R.id.searchFilter)
         initRecyclerView(view)
