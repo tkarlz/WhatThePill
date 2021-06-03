@@ -59,7 +59,7 @@ class PillDataAdapter {
 
     fun colorCompare(data: PillData, result: APIResultData?): Boolean {
         var isContains = true
-        val dataColor = if (data.color2.isBlank()) {
+        val dataColor = if (data.color2.isNotBlank()) {
             "${data.color1}, ${data.color2}"
         } else {
             data.color1

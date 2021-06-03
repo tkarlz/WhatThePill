@@ -86,7 +86,6 @@ class PillListActivity : AppCompatActivity() {
             itemSearch.text = "${displayText}로 검색한 결과"
             itemCount.text = "총 ${mAdapter.itemCount}건"
         }
-
         val rcv: RecyclerView = findViewById(R.id.mRecyclerView)
         rcv.adapter = mAdapter
 
@@ -103,7 +102,7 @@ class PillListActivity : AppCompatActivity() {
         // Handle presses on the action bar items
         return when(item.itemId){
             R.id.action_btn1 -> {
-                FilterPopup(this).showFilterPopup()
+                FilterPopup(this, result).showFilterPopup()
             }
             else -> {
                 super.onOptionsItemSelected(item)

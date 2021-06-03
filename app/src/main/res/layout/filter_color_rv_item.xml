@@ -15,6 +15,7 @@
             android:textOn="컬러"
             android:textOff="컬러"
             android:textStyle="bold"
+            android:foreground="@drawable/item_border"
             android:textColor="@color/colorWhite"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
