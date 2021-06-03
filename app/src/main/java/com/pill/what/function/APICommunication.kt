@@ -6,6 +6,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.IOException
+import java.net.ProtocolException
 import java.net.URISyntaxException
 
 class APICommunication(val dialog: Dialog) {
@@ -41,7 +42,11 @@ class APICommunication(val dialog: Dialog) {
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
-                    launch(response.body!!.string())
+                    try {
+                        launch(response.body!!.string())
+                    } catch (e: ProtocolException) {
+                        dialog.dismiss()
+                    }
                 }
                 dialog.dismiss()
             }
