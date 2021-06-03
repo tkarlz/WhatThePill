@@ -25,8 +25,6 @@ class SearchActivity : AppCompatActivity() {
         actionBar!!.title = "의약품 정보 검색"
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-
-
         db = AppDatabase.getInstance(this)
 
         searchEdit.setOnEditorActionListener { _, actionId, _ ->
