@@ -17,7 +17,7 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="검색어를 입력해주세요."
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:imeOptions="actionSearch"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="parent"

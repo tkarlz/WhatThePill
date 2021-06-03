@@ -49,7 +49,7 @@ class PillListActivity : AppCompatActivity() {
 
             setDisplayShowHomeEnabled(true)
             setDisplayUseLogoEnabled(true)
-            setLogo(R.drawable.ic_baseline_medical_services_24)
+            setLogo(R.drawable.ic_icon)
         }
 
         db = AppDatabase.getInstance(this)
