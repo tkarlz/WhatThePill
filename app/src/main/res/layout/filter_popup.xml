@@ -25,6 +25,7 @@
                 android:text="식별문자" />
 
             <EditText
+                android:id="@+id/prints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
@@ -35,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/textView12"
@@ -45,7 +47,7 @@
                 android:text="제형" />
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/formulationSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -55,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/textView13"
@@ -65,12 +68,32 @@
                 android:text="모양" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/shapeSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:text="분할선" />
+
+            <Spinner
+                android:id="@+id/dividingLineSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -86,28 +109,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/filterColorRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="20dp"
-                android:text="분할선" />
-
-            <Spinner
-                android:id="@+id/spinner4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
