@@ -75,7 +75,8 @@ class PillDataAdapter {
     }
     fun printCompare(data: PillData, result: APIResultData?): Boolean {
         var isContains = false
-        result?.prints?.forEach {
+        val print = result?.prints?.joinToString(" ")?.split(" ")
+        print?.forEach {
             if (data.print_front.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", "")) ||
                 data.print_back.replace("\\[.*]".toRegex(), "").contains(it.replace(" ", ""))
             ) {
